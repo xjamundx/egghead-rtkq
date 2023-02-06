@@ -1,0 +1,36 @@
+{
+  "name": "egghead-rtkq",
+  "version": "1.0.0",
+  "description": "A repo to showcase using rtk query",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xjamundx/egghead-rtkq.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xjamundx/egghead-rtkq/issues"
+  },
+  "homepage": "https://github.com/xjamundx/egghead-rtkq#readme",
+  "type": "module",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "msw": "^1.0.0",
+    "vite": "^4.1.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
