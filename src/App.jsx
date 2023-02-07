@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <TopNav />
-      <h1>Hello</h1>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dogs" element={<DogsPage />} />
