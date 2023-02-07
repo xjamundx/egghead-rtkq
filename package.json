@@ -20,8 +20,12 @@
   "homepage": "https://github.com/xjamundx/egghead-rtkq#readme",
   "type": "module",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router": "^6.8.1",
+    "react-router-dom": "^6.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
