@@ -1,7 +1,10 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
   text-align: center;
 }
 
@@ -39,4 +42,28 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.topNav {
+  background-color: #ffaf08;
+  height: 5em;
+}
+
+.topNav ul {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.topNav a {
+  font-size: 1.8em;
+  line-height: 2.5em;
+  text-shadow: 1px 2px 3px #b269b2;
+  transition: all 0.25s;
+}
+
+.topNav a:hover {
+  text-shadow: 1px 2px 5px #b269b2, 1px 1px 1px white;
+  font-size: 2em;
 }
