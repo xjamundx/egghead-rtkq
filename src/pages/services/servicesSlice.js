@@ -1,31 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: 0,
+  loading: false,
+  hasServices: false,
+  services: [],
 };
 
 export const servicesSlice = createSlice({
   name: "services",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    servicesLoading: (state) => {
+      state.loading = true;
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    servicesReceived: (state, action) => {
+      state.loading = false;
+      state.hasServices = true;
+      state.services = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } =
-  servicesSlice.actions;
+export const { servicesLoading, servicesReceived } = servicesSlice.actions;
+
+export const getServicesForDog = (dog) => (state) => {
+  state.services
+    .filter((service) => service.restrictions.breed.includes(dog.breed))
+    .filter(service > service.restrictions.size.includes(dog.size));
+};
 
 export default servicesSlice.reducer;

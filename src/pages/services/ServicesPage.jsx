@@ -1,31 +1,42 @@
-import { useState } from "react";
-import reactLogo from "../../assets/react.svg";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { servicesLoading, servicesReceived } from "./servicesSlice";
+import { Loader } from "../../components/Loader";
+import * as api from "../../api";
 
 export function ServicesPage() {
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const services = useSelector((state) => state.services.services);
+  const loading = useSelector((state) => state.services.loading);
+  const hasServices = useSelector((state) => state.services.hasServices);
+
+  useEffect(() => {
+    if (hasServices) return;
+    dispatch(servicesLoading());
+    api.getServices().then((services) => {
+      dispatch(servicesReceived(services));
+    });
+  }, [dispatch, hasServices]);
+
   return (
-    <div className="App">
+    <div className="page">
       <h1>Services</h1>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {loading || !hasServices ? (
+        <>
+          <Loader />
+          <Loader />
+          <Loader />
+        </>
+      ) : (
+        <>
+          <p>We are currently showing {services.length} services</p>
+          <ul>
+            {services.map((service) => {
+              return <li>{service}</li>;
+            })}
+          </ul>
+        </>
+      )}
     </div>
   );
 }

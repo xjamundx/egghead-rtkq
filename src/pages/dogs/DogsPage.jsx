@@ -1,11 +1,20 @@
 import { useState } from "react";
+import * as api from "../../api";
+import { useSelector } from "react-redux";
 import reactLogo from "../../assets/react.svg";
 
 export function DogsPage() {
-  const [count, setCount] = useState(0);
+  const dogs = useSelector((state) => state.dogs.dogs);
+  const dogsReady = useSelector((state) => state.dogs.dogsReady);
+  const activeDog = useSelector((state) => state.dogs.activeDog);
   return (
-    <div className="App">
-      <h1>Dogs Page</h1>
+    <div className="page">
+      <h1>My Dogs</h1>
+      <p>
+        It's important that you provide us with a complete and accurate list of
+        all of your dogs, so that we can provide them with the best services
+        possible.
+      </p>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
@@ -23,9 +32,6 @@ export function DogsPage() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }

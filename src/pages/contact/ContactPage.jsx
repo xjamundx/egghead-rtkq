@@ -1,31 +1,42 @@
-import { useState } from "react";
-import reactLogo from "../../assets/react.svg";
+import * as api from "../../api";
 
 export function ContactPage() {
-  const [count, setCount] = useState(0);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    api.makeContact(formData);
+  };
   return (
-    <div className="App">
+    <div className="page">
       <h1>Contact</h1>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <p>
+        Please send us a detailed message if you'd like to get in touch to ask
+        questions about any of our dog grooming services, or anything at all.
       </p>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:{" "}
+          <input
+            type="email"
+            name="email"
+            placeholder="youremail@youremail.com"
+          />
+        </label>
+        <label>
+          Subject:{" "}
+          <input
+            type="text"
+            name="subject"
+            placeholder="Short subject line..."
+          />
+        </label>
+        <textarea
+          name="contents"
+          rows={5}
+          placeholder="Please let us know what you want answered and we will try to help"
+        ></textarea>
+      </form>
     </div>
   );
 }

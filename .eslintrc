@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaFeatures": { "jsx": true },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "env": { "es2020": true, "browser": true, "node": true },
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  }
+}
