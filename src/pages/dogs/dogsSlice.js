@@ -25,6 +25,11 @@ export const removeDog = createAsyncThunk("dogs/removeDog", async (dogId) => {
   return response.data;
 });
 
+export const addDog = createAsyncThunk("dogs/addDog", async (dogDetails) => {
+  const response = await api.addDog(dogDetails);
+  return response.data;
+});
+
 export const dogsSlice = createSlice({
   name: "dogs",
   initialState,

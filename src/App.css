@@ -116,15 +116,46 @@ html {
 
 label {
   display: block;
-  margin-bottom: 1em;
+  width: 100px;
+  background: black;
+  color: orange;
+  font-weight: bold;
+  padding: 0.25em 0.5em;
 }
 
 textarea,
 input[type="email"],
 input[type="text"] {
   width: 480px;
+  margin-bottom: 1em;
+  vertical-align: top;
+  font-size: 18px;
+}
+
+form button {
+  background-color: black;
+  color: orange;
+  outline-color: orange;
+  box-shadow: 3px 3px 2px orange;
+  border-radius: 0;
+}
+
+form button:hover {
+  box-shadow: 1px 1px 1px orange;
+  border-color: transparent;
+}
+
+form button:focus {
+  outline: 4px auto white;
+  box-shadow: none;
 }
 
 .page {
   width: 600px;
+}
+
+form {
+  text-align: left;
+  width: fit-content;
+  margin: 0 auto;
 }

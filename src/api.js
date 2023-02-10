@@ -18,4 +18,6 @@ export async function fetchAllDogs() {
 
 // other calls
 
-export async function makeContact() {}
+export async function makeContact(data) {
+  console.log("Making contact with", data);
+}

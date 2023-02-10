@@ -24,10 +24,11 @@ export const servicesSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { servicesLoading, servicesReceived } = servicesSlice.actions;
 
-export const getServicesForDog = (dog) => (state) => {
-  state.services
+export const getServicesForDog = (state) => {
+  const dog = state.dogs.activeDog;
+  return state.services.services
     .filter((service) => service.restrictions.breed.includes(dog.breed))
-    .filter(service > service.restrictions.size.includes(dog.size));
+    .filter((service) => service.restrictions.size.includes(dog.size));
 };
 
 export default servicesSlice.reducer;
