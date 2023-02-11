@@ -10,7 +10,7 @@ html {
 
 .page {
   max-width: 640px;
-  margin: 0 auto;
+  margin: 1em auto;
 }
 
 .logo {

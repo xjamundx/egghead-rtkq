@@ -10,6 +10,7 @@ export function ServicesPage() {
   const services = useSelector((state) => state.services.services);
   const loading = useSelector((state) => state.services.loading);
   const hasServices = useSelector((state) => state.services.hasServices);
+  const myDogs = useSelector((state) => state.dogs.myDogs);
 
   useEffect(() => {
     if (hasServices) return;
@@ -21,6 +22,7 @@ export function ServicesPage() {
 
   return (
     <div className="page">
+      <h1>Services</h1>
       {loading || !hasServices ? (
         <>
           <Loader />
@@ -29,11 +31,13 @@ export function ServicesPage() {
         </>
       ) : (
         <>
-          <p>
-            We are currently showing all {services.length} of our services.
-            <br />
-            To see a customized list please <Link to="/dogs">add a dog</Link>.
-          </p>
+          {Object.values(myDogs).length === 0 ? (
+            <p>
+              We are currently showing all {services.length} of our services.
+              <br />
+              To see a customized list please <Link to="/dogs">add a dog</Link>.
+            </p>
+          ) : null}
           {services.map((service) => (
             <div className="card" key={service.id}>
               <img src={service.imageSrc} alt={service.imageAlt} />

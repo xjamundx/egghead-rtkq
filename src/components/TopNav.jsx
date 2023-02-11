@@ -6,13 +6,13 @@ export function TopNav() {
     <nav className="topNav">
       <ul>
         <li>
-          <Link className={location.pathname === "/" && "selected"} to="/">
+          <Link className={location.pathname === "/" ? "selected" : ""} to="/">
             Home
           </Link>
         </li>
         <li>
           <Link
-            className={location.pathname === "/services" && "selected"}
+            className={location.pathname === "/services" ? "selected" : ""}
             to="/services"
           >
             Services
@@ -20,7 +20,7 @@ export function TopNav() {
         </li>
         <li>
           <Link
-            className={location.pathname === "/dogs" && "selected"}
+            className={location.pathname === "/dogs" ? "selected" : ""}
             to="/dogs"
           >
             My Dogs
@@ -28,7 +28,7 @@ export function TopNav() {
         </li>
         <li>
           <Link
-            className={location.pathname === "/contact" && "selected"}
+            className={location.pathname === "/contact" ? "selected" : ""}
             to="/contact"
           >
             Contact
