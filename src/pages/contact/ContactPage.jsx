@@ -24,19 +24,11 @@ export function ContactPage() {
           name="email"
           placeholder="youremail@youremail.com"
         />
-        <label htmlFor="subject">Subject: </label>
-        <input
-          required
-          type="text"
-          id="subject"
-          name="subject"
-          placeholder="Short subject line..."
-        />
-        <label htmlFor="contents">Services:</label>
+        <label htmlFor="message">Message:</label>
         <textarea
           required
-          id="contents"
-          name="contents"
+          id="message"
+          name="message"
           rows={5}
           placeholder="Please let us know what you want answered and we will try to help"
         />

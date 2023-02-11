@@ -1,7 +1,7 @@
 // services calls
 
 export async function getServices() {
-  return [1, 2, 3];
+  return fetch("/services").then((response) => response.json());
 }
 
 // dog calls

@@ -1,0 +1,62 @@
+{
+  "a098239": {
+    "id": "a098239",
+    "title": "Fur Trim ✂️",
+    "description": "Get your dog ready for summer with a close trim that isn't going to fall out all over your couch.",
+    "price": "54.99",
+    "imageSrc": "/dogs/trim.jpg",
+    "imageAlt": "A cute dog with very short fur",
+    "restrictions": {
+      "minAge": 1,
+      "maxWeight": 100
+    }
+  },
+  "b020mc020": {
+    "id": "b020mc020",
+    "title": "Tooth Brushing 😬",
+    "description": "Get rid of those stinky yellow teeth with our incredible tooth brushing service.",
+    "imageSrc": "/dogs/teeth.jpg",
+    "imageAlt": "A cute dog showing his teeth",
+    "price": "8.99",
+    "restrictions": {
+      "minAge": 1,
+      "maxWeight": 100
+    }
+  },
+  "coa0j209m0c9m": {
+    "id": "coa0j209m0c9m",
+    "title": "Ear Cleaning 👂",
+    "description": "Keep those ears perky and your dog alert with a full ear cleaning, which includes trimming out excess hair. Ear wax be gone.",
+    "price": "12.50",
+    "imageSrc": "/dogs/walk.jpg",
+    "imageAlt": "A cute dog showing his teeth",
+    "restrictions": {
+      "minAge": 1,
+      "maxWeight": 100
+    }
+  },
+  "e123": {
+    "id": "e",
+    "title": "Full Wash & Groomming 🛁",
+    "description": "Scrub a dub dub. Trim and bathe your mutt with our deluxue wash and grooming service. Be prepared to meet a transformed dog.",
+    "imageSrc": "/dogs/bath.jpg",
+    "imageAlt": "A cute dog in a tub by Elina Volkova",
+    "price": "89.99",
+    "restrictions": {
+      "minAge": 1,
+      "maxWeight": 100
+    }
+  },
+  "g3456": {
+    "id": "g3456",
+    "title": "Singing Lessons 🎤",
+    "description": "Would you like your do go to be able to sing on shows like America's Got Talent or Pop Idol? Try these singing lessons to get the most from your dog today.",
+    "imageSrc": "/dogs/singing.jpg",
+    "imageAlt": "A cute dog opening his mouth",
+    "price": "89.99",
+    "restrictions": {
+      "minAge": 1,
+      "maxWeight": 100
+    }
+  }
+}

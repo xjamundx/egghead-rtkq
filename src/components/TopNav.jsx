@@ -1,20 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function TopNav() {
+  const location = useLocation();
   return (
     <nav className="topNav">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link className={location.pathname === "/" && "selected"} to="/">
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/services">Services</Link>
+          <Link
+            className={location.pathname === "/services" && "selected"}
+            to="/services"
+          >
+            Services
+          </Link>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link
+            className={location.pathname === "/dogs" && "selected"}
+            to="/dogs"
+          >
+            My Dogs
+          </Link>
         </li>
         <li>
-          <Link to="/dogs">My Dogs</Link>
+          <Link
+            className={location.pathname === "/contact" && "selected"}
+            to="/contact"
+          >
+            Contact
+          </Link>
         </li>
       </ul>
     </nav>

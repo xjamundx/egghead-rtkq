@@ -41,10 +41,6 @@ html {
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
 }
@@ -68,9 +64,11 @@ html {
   transition: all 0.25s;
 }
 
-.topNav a:hover {
+.topNav a.hover,
+.topNav a.selected {
   text-shadow: 1px 2px 5px #b269b2, 1px 1px 1px white;
   font-size: 2em;
+  text-decoration: underline;
 }
 .loader {
   width: 320px;
@@ -132,6 +130,7 @@ input[type="text"] {
   font-size: 18px;
 }
 
+.card button,
 form button {
   background-color: black;
   color: orange;
@@ -140,11 +139,12 @@ form button {
   border-radius: 0;
 }
 
+.card button:hover,
 form button:hover {
   box-shadow: 1px 1px 1px orange;
   border-color: transparent;
 }
-
+.card button:focus,
 form button:focus {
   outline: 4px auto white;
   box-shadow: none;
@@ -158,4 +158,33 @@ form {
   text-align: left;
   width: fit-content;
   margin: 0 auto;
+}
+
+.card {
+  align-items: flex-start;
+  padding: 1em;
+  display: flex;
+  border-radius: 1em;
+  justify-content: space-between;
+  border: 3px solid orange;
+  flex-direction: row;
+  margin-bottom: 1em;
+  gap: 1em;
+}
+
+.card :where(h3, h4) {
+  margin: 0;
+}
+
+.card h4 {
+  font-weight: normal;
+}
+
+.card img {
+  width: 200px;
+  border-radius: 0.6em;
+}
+
+.card > div {
+  align-items: end;
 }
