@@ -1,15 +1,27 @@
+import { useState } from "react";
 import * as api from "../../api";
 
 export function ContactPage() {
+  const [wasSent, setWasSent] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     api.makeContact(Object.fromEntries(formData));
+    form.reset();
+
+    // show a
+    setWasSent(true);
+    setTimeout(() => {
+      setWasSent(false);
+    }, 2000);
   };
   return (
     <div className="page">
       <h1>Contact</h1>
+      <p className={`alert ${wasSent ? "show" : ""}`}>
+        <b>Message sent</b>
+      </p>
       <p>
         Please send us a detailed message if you&apos;d like to get in touch to
         ask questions about any of our dog grooming services, or anything at

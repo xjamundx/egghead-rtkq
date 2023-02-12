@@ -284,3 +284,20 @@ dd {
 .card.luckyDog .dogName:after {
   content: "🌟";
 }
+
+.alert {
+  width: 66%;
+  opacity: 0%;
+  background: orange;
+  color: white;
+  margin: 0 auto;
+  margin-top: -2.3em;
+  position: relative;
+  top: 0.6em;
+  font-size: 1.2em;
+  transition: opacity 1s ease-in;
+}
+
+.alert.show {
+  opacity: 100%;
+}

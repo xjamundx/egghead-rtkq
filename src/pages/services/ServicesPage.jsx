@@ -46,27 +46,23 @@ export function ServicesPage() {
               <br />
               To see a customized list please <Link to="/dogs">add a dog</Link>.
             </p>
+          ) : luckyDog ? (
+            <>
+              <p>
+                Showing{" "}
+                <b>
+                  {myServices.length}/{services.length}
+                </b>{" "}
+                services available for <b>{myDogs[luckyDog].name}</b>
+              </p>
+              <LuckyDog />
+            </>
           ) : (
             <>
-              {luckyDog ? (
-                <p>
-                  Showing{" "}
-                  <b>
-                    {myServices.length}/{services.length}
-                  </b>{" "}
-                  services available for <b>{myDogs[luckyDog].name}</b>
-                </p>
-              ) : (
-                <>
-                  <p>
-                    We are currently showing all {services.length} of our
-                    services.
-                  </p>
-                  <p>
-                    To see a customized list please select a lucky dog below.
-                  </p>
-                </>
-              )}
+              <p>
+                We are currently showing all {services.length} of our services.
+              </p>
+              <p>To see a customized list please select a lucky dog below.</p>
               <LuckyDog />
             </>
           )}

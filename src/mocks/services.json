@@ -8,7 +8,6 @@
     "imageAlt": "A cute dog with very short fur",
     "restrictions": {
       "minAge": 1,
-      "breeds": [],
       "size": ["small", "teacup", "medium", "large", "x-large"]
     }
   },
@@ -20,7 +19,7 @@
     "imageAlt": "A cute dog showing his teeth",
     "price": "8.99",
     "restrictions": {
-      "minAge": 1,
+      "minAge": 3,
       "size": ["small", "teacup", "medium", "large", "x-large"]
     }
   },
@@ -32,7 +31,8 @@
     "imageSrc": "/images/walk.jpg",
     "imageAlt": "A cute dog showing his teeth",
     "restrictions": {
-      "minAge": 1
+      "minAge": 1,
+      "size": ["small", "medium", "large", "x-large"]
     }
   },
   "e123": {
