@@ -4,23 +4,24 @@
     "title": "Fur Trim ✂️",
     "description": "Get your dog ready for summer with a close trim that isn't going to fall out all over your couch.",
     "price": "54.99",
-    "imageSrc": "/dogs/trim.jpg",
+    "imageSrc": "/images/trim.jpg",
     "imageAlt": "A cute dog with very short fur",
     "restrictions": {
       "minAge": 1,
-      "maxWeight": 100
+      "breeds": [],
+      "size": ["small", "teacup", "medium", "large", "x-large"]
     }
   },
   "b020mc020": {
     "id": "b020mc020",
     "title": "Tooth Brushing 😬",
     "description": "Get rid of those stinky yellow teeth with our incredible tooth brushing service.",
-    "imageSrc": "/dogs/teeth.jpg",
+    "imageSrc": "/images/teeth.jpg",
     "imageAlt": "A cute dog showing his teeth",
     "price": "8.99",
     "restrictions": {
       "minAge": 1,
-      "maxWeight": 100
+      "size": ["small", "teacup", "medium", "large", "x-large"]
     }
   },
   "coa0j209m0c9m": {
@@ -28,35 +29,35 @@
     "title": "Ear Cleaning 👂",
     "description": "Keep those ears perky and your dog alert with a full ear cleaning. Ear wax be gone.",
     "price": "12.50",
-    "imageSrc": "/dogs/walk.jpg",
+    "imageSrc": "/images/walk.jpg",
     "imageAlt": "A cute dog showing his teeth",
     "restrictions": {
-      "minAge": 1,
-      "maxWeight": 100
+      "minAge": 1
     }
   },
   "e123": {
     "id": "e",
     "title": "Full Wash & Groomming 🛁",
     "description": "Scrub a dub dub dub. Trim and bathe your mutt with our deluxue wash and grooming service. Be prepared to meet a newly transformed dog after just 3 hours.",
-    "imageSrc": "/dogs/bath.jpg",
+    "imageSrc": "/images/bath.jpg",
     "imageAlt": "A cute dog in a tub by Elina Volkova",
     "price": "89.99",
     "restrictions": {
       "minAge": 1,
-      "maxWeight": 100
+      "size": ["small", "teacup", "medium", "large"]
     }
   },
   "g3456": {
     "id": "g3456",
     "title": "Singing Lessons 🎤",
     "description": "Would you like your doggo to be able to sing on shows like America's Got Talent or Pop Idol? Try these singing lessons to get the most from your dog today.",
-    "imageSrc": "/dogs/singing.jpg",
+    "imageSrc": "/images/singing.jpg",
     "imageAlt": "A cute dog opening his mouth",
     "price": "89.99",
     "restrictions": {
-      "minAge": 1,
-      "maxWeight": 100
+      "minAge": 3,
+      "size": ["jumbo", "large", "x-large"],
+      "breed": ["husky", "hound", "beagle", "shephard"]
     }
   }
 }

@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { activeDogChosen, removeDog, addDog, fetchAllDogs } from "./dogsSlice";
+import { removeDog, addDog, fetchAllDogs } from "./dogsSlice";
+import { LuckyDog } from "./LuckyDog";
 
 export function DogsPage() {
   const dialogRef = useRef();
   const dispatch = useDispatch();
   const dogsReady = useSelector((state) => state.dogs.dogsReady);
   const myDogs = useSelector((state) => state.dogs.myDogs);
-  const activeDog = useSelector((state) => state.dogs.activeDog);
+  const luckyDog = useSelector((state) => state.dogs.luckyDog);
 
   useEffect(() => {
     if (dogsReady) return;
@@ -39,15 +40,21 @@ export function DogsPage() {
       <p>
         It&apos;s important that you provide us with a complete and accurate
         list of <i>all</i> of your dogs, so that we can provide them with the
-        best services possible. If you have multiple dogs you can also select
-        which dog you would like to receive our services.
+        best services possible.
       </p>
+      <p>Choose the lucky dog that will be groomed next.</p>
+      <LuckyDog />
       {Object.values(myDogs).map((dog) => {
         return (
-          <div key={dog.id} className="card closable">
+          <div
+            key={dog.id}
+            className={
+              "card closable" + (luckyDog === dog.id ? " luckyDog" : "")
+            }
+          >
             <img
               alt="a random cute dog photo by Sharon Snider"
-              src="/dogs/cute.jpg"
+              src="/images/cute.jpg"
             />
             <div style={{ flex: 1 }}>
               <div className="dogCardHeader">
@@ -107,19 +114,20 @@ export function DogsPage() {
               <label htmlFor="breed">Breed:</label>
               <select id="breed" name="breed" defaultValue="default" required>
                 <option value="default">(Select)</option>
-                <option>Golden Retriever</option>
-                <option>Pug</option>
-                <option>Dalmation</option>
-                <option>German Shepherd</option>
-                <option>Lab</option>
-                <option>Poodle</option>
-                <option>French Bulldog</option>
-                <option>Cockerspaniel</option>
-                <option>Husky</option>
-                <option>Great Dane</option>
-                <option>Scottish Terrier</option>
-                <option>Mixed</option>
-                <option>Other</option>
+                <option value="golden-retriever">Golden Retriever</option>
+                <option value="pug">Pug</option>
+                <option value="dalmation">Dalmation</option>
+                <option value="german-shepherd">German Shepherd</option>
+                <option value="lab">Lab</option>
+                <option value="poodle">Poodle</option>
+                <option value="french-bulldog">French Bulldog</option>
+                <option value="cockerspaniel">Cockerspaniel</option>
+                <option value="husky">Husky</option>
+                <option value="hound">Hound</option>
+                <option value="great-dane">Great Dane</option>
+                <option value="scottish-terrir">Scottish Terrier</option>
+                <option value="mixed">Mixed</option>
+                <option value="other">Other</option>
               </select>
             </fieldset>
           </div>

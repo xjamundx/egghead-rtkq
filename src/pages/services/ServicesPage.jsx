@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { servicesLoading, servicesReceived } from "./servicesSlice";
+import { LuckyDog } from "../dogs/LuckyDog";
+import {
+  servicesLoading,
+  servicesReceived,
+  getServicesForLuckyDog,
+} from "./servicesSlice";
 import { Loader } from "../../components/Loader";
 import * as api from "../../api";
 
@@ -11,6 +16,10 @@ export function ServicesPage() {
   const loading = useSelector((state) => state.services.loading);
   const hasServices = useSelector((state) => state.services.hasServices);
   const myDogs = useSelector((state) => state.dogs.myDogs);
+  const luckyDog = useSelector((state) => state.dogs.luckyDog);
+  const myServices = useSelector(getServicesForLuckyDog);
+
+  console.log({ myDogs, luckyDog });
 
   useEffect(() => {
     if (hasServices) return;
@@ -37,8 +46,31 @@ export function ServicesPage() {
               <br />
               To see a customized list please <Link to="/dogs">add a dog</Link>.
             </p>
-          ) : null}
-          {services.map((service) => (
+          ) : (
+            <>
+              {luckyDog ? (
+                <p>
+                  Showing{" "}
+                  <b>
+                    {myServices.length}/{services.length}
+                  </b>{" "}
+                  services available for <b>{myDogs[luckyDog].name}</b>
+                </p>
+              ) : (
+                <>
+                  <p>
+                    We are currently showing all {services.length} of our
+                    services.
+                  </p>
+                  <p>
+                    To see a customized list please select a lucky dog below.
+                  </p>
+                </>
+              )}
+              <LuckyDog />
+            </>
+          )}
+          {myServices.map((service) => (
             <div className="card" key={service.id}>
               <img src={service.imageSrc} alt={service.imageAlt} />
               <div className="cardContents">

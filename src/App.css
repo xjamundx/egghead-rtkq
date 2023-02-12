@@ -270,3 +270,17 @@ dd {
   display: flex;
   justify-content: space-between;
 }
+
+.luckyDogComponent {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2em;
+}
+
+.card.luckyDog {
+  background-color: rgb(255 176 59 / 15%);
+}
+.card.luckyDog .dogName:after {
+  content: "🌟";
+}

@@ -3,7 +3,7 @@ import * as api from "../../api";
 
 const initialState = {
   myDogs: {}, // { [id]: { id, breed, name, size, age }
-  activeDog: "", // id
+  luckyDog: "", // id
   dogsLoaded: false,
 };
 
@@ -34,8 +34,8 @@ export const dogsSlice = createSlice({
   name: "dogs",
   initialState,
   reducers: {
-    activeDogChosen: (state, action) => {
-      state.activeDog = action.payload.id;
+    luckyDogChosen: (state, action) => {
+      state.luckyDog = action.payload.id;
     },
   },
   extraReducers: (builder) => {
@@ -47,6 +47,7 @@ export const dogsSlice = createSlice({
       state.dogsReady = true;
       const dogs = action.payload;
       const myDogs = {};
+
       // calculate the age and size properties before saving
       for (const id in dogs) {
         const dog = dogs[id];
@@ -74,7 +75,7 @@ export const dogsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { activeDogChosen } = dogsSlice.actions;
+export const { luckyDogChosen } = dogsSlice.actions;
 
 export default dogsSlice.reducer;
 
