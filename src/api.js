@@ -1,23 +1,35 @@
 // services calls
 
 export async function getServices() {
-  return fetch("/services").then((response) => response.json());
+  return fetch("/api/services").then((response) => response.json());
 }
 
 // dog calls
 
 export async function updateDog(id, dog) {}
 
-export async function addDog() {}
+export async function addDog(dog) {
+  return fetch("/api/dogs", {
+    method: "post",
+    body: JSON.stringify(dog),
+  }).then((response) => response.json());
+}
 
-export async function deleteDog(id) {}
+export async function deleteDog(id) {
+  return fetch("/api/dogs/" + id, {
+    method: "delete",
+  }).then((response) => response.json());
+}
 
 export async function fetchAllDogs() {
-  [1, 2, 3];
+  return fetch("/api/dogs").then((response) => response.json());
 }
 
 // other calls
 
 export async function makeContact(data) {
-  console.log("Making contact with", data);
+  return fetch("/api/contact", {
+    method: "post",
+    body: JSON.stringify(data),
+  }).then((response) => response.json());
 }

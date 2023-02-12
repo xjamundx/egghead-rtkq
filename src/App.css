@@ -121,17 +121,21 @@ label {
   padding: 0.25em 0.5em;
 }
 
+select,
 textarea,
-input[type="email"],
-input[type="text"] {
-  width: 480px;
+input {
   margin-bottom: 1em;
   vertical-align: top;
   font-size: 18px;
 }
 
-.card button,
-form button {
+textarea,
+input[type="email"],
+input[type="text"] {
+  width: 480px;
+}
+
+body button {
   background-color: black;
   color: orange;
   outline-color: orange;
@@ -139,19 +143,14 @@ form button {
   border-radius: 0;
 }
 
-.card button:hover,
-form button:hover {
+body button:hover {
   box-shadow: 1px 1px 1px orange;
   border-color: transparent;
 }
-.card button:focus,
-form button:focus {
+
+body button:focus {
   outline: 4px auto white;
   box-shadow: none;
-}
-
-.page {
-  width: 600px;
 }
 
 form {
@@ -187,4 +186,78 @@ form {
 
 .card > div {
   align-items: end;
+}
+
+.dogDialog {
+  border: none;
+  border: 2px solid orange;
+  padding: 1.5em;
+  border-radius: 0.5em;
+}
+
+.dogDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.2;
+  background-image: repeating-linear-gradient(
+    45deg,
+    orange,
+    orange 10px,
+    white 10px,
+    white 20px
+  );
+}
+
+.dogsForm label {
+  width: 150px;
+}
+.dogsForm select {
+  display: block;
+}
+
+.dogsForm .grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+}
+.dogsForm input {
+  width: auto;
+  min-width: 250px;
+}
+
+.dogsForm .center {
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: space-evenly;
+}
+
+button.secondary {
+  background-color: #fafafa;
+  color: black;
+}
+
+button.secondary:focus {
+  box-shadow: -1px -1px 4px black;
+  border-radius: 0;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  text-align: right;
+  grid-column-start: 1;
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 1em;
+  text-align: left;
+  grid-column-start: 2;
 }

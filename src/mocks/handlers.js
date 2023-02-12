@@ -1,59 +1,67 @@
 import { rest } from "msw";
 import services from "./services.json";
 
+const DOG_KEY = "dogs";
+const dogs = JSON.parse(sessionStorage.getItem(DOG_KEY) || "{}");
+
+const lightlyPersistDogs = () => {
+  sessionStorage.setItem(DOG_KEY, JSON.stringify(dogs));
+};
+
 export const handlers = [
   // submit the contact form
-  rest.post("/contact", (req, res, ctx) => {
-    const { username } = req.json;
+  rest.post("/api/contact", (req, res, ctx) => {
+    const data = req.json();
+    console.log("Received contact form submission", data);
     return res(ctx.json({}));
   }),
 
   // get the list of all of the services
-  rest.get("/services", (req, res, ctx) => {
-    return res(
-      ctx.json(Object.values(services))
-      //   Object.values(services).map((service) => {
-      //     const { title, thumbnail, price, id, restrictions } = service;
-      //     return { title, thumbnail, price, id, restrictions };
-      //   })
-      // )
-    );
+  rest.get("/api/services", (req, res, ctx) => {
+    return res(ctx.json(Object.values(services)));
   }),
 
   // get detail for a specific service
-  rest.get("/services/:id", (req, res, ctx) => {
+  rest.get("/api/services/:id", (req, res, ctx) => {
     const { id } = req.params;
     return res(ctx.json(services[id]));
   }),
 
   // get all of your dogs
-  rest.get("/dogs", (req, res, ctx) => {
-    return res(ctx.json(["dog1", "dog2", "dog3"]));
+  rest.get("/api/dogs", (req, res, ctx) => {
+    return res(ctx.json(dogs));
   }),
 
   // add a dog
-  rest.post("/dogs", (req, res, ctx) => {
-    const { username } = req.json;
-    return res(
-      ctx.json({
-        id: "f79e82e8-c34a-4dc7-a49e-9fadc0979fda",
-        username,
-        firstName: "John",
-        lastName: "Maverick",
-      })
-    );
+  rest.post("/api/dogs", async (req, res, ctx) => {
+    const data = await req.json();
+    const id = crypto.randomUUID();
+    data.id = id;
+
+    // mutate
+    dogs[id] = data;
+
+    // then save
+    lightlyPersistDogs();
+
+    return res(ctx.json({ success: true }));
   }),
 
-  // update a specific dog
-  rest.post("/dogs/:id", (req, res, ctx) => {
-    const { username } = req.json;
-    return res(
-      ctx.json({
-        id: "f79e82e8-c34a-4dc7-a49e-9fadc0979fda",
-        username,
-        firstName: "John",
-        lastName: "Maverick",
-      })
-    );
+  rest.delete("/api/dogs/:id", async (req, res, ctx) => {
+    const { id } = req.params;
+    console.log("Rest DELETE", { id });
+    if (id in dogs) {
+      // delete
+      delete dogs[id];
+
+      // then save
+      lightlyPersistDogs();
+
+      // then return whategver happens
+      return res(ctx.json({ id }));
+    } else {
+      ctx.status(404);
+      return res(ctx.json({ error: "what dog?" }));
+    }
   }),
 ];

@@ -9,25 +9,25 @@ const initialState = {
 
 export const fetchAllDogs = createAsyncThunk("dogs/fetchAllDogs", async () => {
   const response = await api.fetchAllDogs();
-  return response.data;
+  return response;
 });
 
 export const updateDogInfo = createAsyncThunk(
   "dogs/updateDogInfo",
   async (dogId, dogDetails) => {
     const response = await api.updateDog(dogId, dogDetails);
-    return response.data;
+    return response;
   }
 );
 
 export const removeDog = createAsyncThunk("dogs/removeDog", async (dogId) => {
   const response = await api.deleteDog(dogId);
-  return response.data;
+  return response;
 });
 
 export const addDog = createAsyncThunk("dogs/addDog", async (dogDetails) => {
   const response = await api.addDog(dogDetails);
-  return response.data;
+  return response;
 });
 
 export const dogsSlice = createSlice({
@@ -38,8 +38,8 @@ export const dogsSlice = createSlice({
       state.activeDog = action.payload.id;
     },
   },
-  additionalReducers: (builder) => {
-    // hello
+  extraReducers: (builder) => {
+    // fetching dogs has pending fulfilled and rejected states
     builder.addCase(fetchAllDogs.pending, (state) => {
       state.dogsReady = false;
     });
@@ -48,20 +48,14 @@ export const dogsSlice = createSlice({
       state.myDogs = action.payload;
     });
     builder.addCase(fetchAllDogs.rejected, (state, action) => {
+      console.log("what happened", { state, action });
       state.dogsReady = false;
       state.myDogs = action.payload;
     });
-    // hello
-    builder.addCase(updateDogInfo.pending, (state) => {
-      state.dogsReady = false;
-    });
-    builder.addCase(updateDogInfo.fulfilled, (state, action) => {
-      state.dogsReady = true;
-      state.myDogs = action.payload;
-    });
-    builder.addCase(updateDogInfo.rejected, (state, action) => {
-      state.dogsReady = false;
-      state.myDogs = action.payload;
+
+    // remove dog, optimistically
+    builder.addCase(removeDog.pending, (state, action) => {
+      delete state.myDogs[action.meta.arg];
     });
   },
 });

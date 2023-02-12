@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import * as api from "../../api";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   activeDogChosen,
@@ -11,39 +10,140 @@ import {
 import reactLogo from "../../assets/react.svg";
 
 export function DogsPage() {
+  const dialogRef = useRef();
   const dispatch = useDispatch();
   const dogsReady = useSelector((state) => state.dogs.dogsReady);
-  const dogs = useSelector((state) => state.dogs.dogs);
+  const myDogs = useSelector((state) => state.dogs.myDogs);
   const activeDog = useSelector((state) => state.dogs.activeDog);
   useEffect(() => {
     if (dogsReady) return;
     dispatch(fetchAllDogs());
   }, [dispatch, dogsReady]);
+
+  const handleDeleteDog = (e, dog) => {
+    e.preventDefault();
+    dispatch(removeDog(dog.id));
+  };
+
+  const handleNewDog = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    e.currentTarget.reset();
+    const data = Object.fromEntries(formData);
+
+    // add the dog, then refetch the list
+    dispatch(addDog(data)).then(() => {
+      dispatch(fetchAllDogs());
+    });
+
+    // close immediately we don't need to wait
+    dialogRef.current?.close();
+  };
   return (
     <div className="page">
       <h1>My Dogs</h1>
       <p>
         It&apos;s important that you provide us with a complete and accurate
-        list of all of your dogs, so that we can provide them with the best
-        services possible.
+        list of <i>all</i> of your dogs, so that we can provide them with the
+        best services possible. If you have multiple dogs you can also select
+        which dog you would like to receive our services.
       </p>
-      <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" rel="noreferrer" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          {/* count is {count} */}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      {Object.values(myDogs).map((dog) => {
+        return (
+          <div key={dog.id} className="card closable">
+            <img
+              alt="a random cute dog photo by Sharon Snider"
+              src="/dogs/cute.jpg"
+            />
+            <h3 className="dogName">{dog.name}</h3>
+            <div className="cardContents">
+              <dl>
+                <dt>Weight:</dt>
+                <dd>{dog.weight}</dd>
+                <dt>Date of Birth:</dt>
+                <dd>{dog.dob}</dd>
+                <dt>Breed:</dt>
+                <dd>{dog.breed}</dd>
+              </dl>
+            </div>
+            <button
+              className="deleteDog"
+              aria-label={`Remove ${dog.name} from your dog list`}
+              onClick={(e) => handleDeleteDog(e, dog)}
+            >
+              x
+            </button>
+          </div>
+        );
+      })}
+      <dialog ref={dialogRef} className="dogDialog">
+        <form onSubmit={handleNewDog} className="dogsForm">
+          <div className="grid">
+            <fieldset>
+              <label htmlFor="name">Name:</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="puppo"
+                required
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="dob">Date of Birth:</label>
+              <input id="dob" name="dob" type="date" required />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="weight">Weight (lb):</label>
+              <input
+                id="weight"
+                name="weight"
+                type="number"
+                max="200"
+                min="0"
+                required
+                placeholder="5"
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="breed">Breed:</label>
+              <select id="breed" name="breed" defaultValue="default" required>
+                <option value="default">(Select)</option>
+                <option>Golden Retriever</option>
+                <option>Pug</option>
+                <option>Dalmation</option>
+                <option>German Shepherd</option>
+                <option>Lab</option>
+                <option>Poodle</option>
+                <option>French Bulldog</option>
+                <option>Cockerspaniel</option>
+                <option>Husky</option>
+                <option>Great Dane</option>
+                <option>Scottish Terrier</option>
+                <option>Mixed</option>
+                <option>Other</option>
+              </select>
+            </fieldset>
+          </div>
+          <div className="center">
+            <button
+              type="reset"
+              className="secondary"
+              onClick={() => dialogRef.current?.close()}
+            >
+              Close
+            </button>
+            <button type="submit">Add Dog</button>
+          </div>
+        </form>
+      </dialog>
+      <button
+        onClick={() => {
+          dialogRef.current?.showModal();
+        }}
+      >
+        Add Dog
+      </button>
     </div>
   );
 }
