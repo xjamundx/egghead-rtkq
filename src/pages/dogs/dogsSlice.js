@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../../api";
 
 const initialState = {
-  myDogs: {}, // { [id]: { name, weight, breed, size } }
+  myDogs: {}, // { [id]: { id, breed, name, size, age }
   activeDog: "", // id
   dogsLoaded: false,
 };
@@ -45,10 +45,23 @@ export const dogsSlice = createSlice({
     });
     builder.addCase(fetchAllDogs.fulfilled, (state, action) => {
       state.dogsReady = true;
-      state.myDogs = action.payload;
+      const dogs = action.payload;
+      const myDogs = {};
+      // calculate the age and size properties before saving
+      for (const id in dogs) {
+        const dog = dogs[id];
+        myDogs[id] = {
+          id,
+          breed: dog.breed,
+          name: dog.name,
+          size: getSize(dog.weight),
+          age: getAge(dog.dob),
+        };
+      }
+      console.log({ dogs: action.payload, myDogs });
+      state.myDogs = myDogs;
     });
     builder.addCase(fetchAllDogs.rejected, (state, action) => {
-      console.log("what happened", { state, action });
       state.dogsReady = false;
       state.myDogs = action.payload;
     });
@@ -64,3 +77,19 @@ export const dogsSlice = createSlice({
 export const { activeDogChosen } = dogsSlice.actions;
 
 export default dogsSlice.reducer;
+
+function getSize(weight) {
+  weight = parseInt(weight, 10);
+  if (weight <= 10) return "teacup";
+  if (weight <= 25) return "small";
+  if (weight <= 50) return "medium";
+  if (weight <= 80) return "large";
+  if (weight <= 125) return "x-large";
+  return "jumbo";
+}
+
+const YEAR = 3.156e10;
+function getAge(dob) {
+  const date = +new Date(dob);
+  return Math.floor((Date.now() - date) / YEAR);
+}

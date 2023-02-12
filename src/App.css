@@ -261,3 +261,12 @@ dd {
   text-align: left;
   grid-column-start: 2;
 }
+
+.dogName {
+  display: inline-block;
+}
+
+.dogCardHeader {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  activeDogChosen,
-  removeDog,
-  addDog,
-  updateDogInfo,
-  fetchAllDogs,
-} from "./dogsSlice";
-import reactLogo from "../../assets/react.svg";
+import { activeDogChosen, removeDog, addDog, fetchAllDogs } from "./dogsSlice";
 
 export function DogsPage() {
   const dialogRef = useRef();
@@ -15,6 +8,7 @@ export function DogsPage() {
   const dogsReady = useSelector((state) => state.dogs.dogsReady);
   const myDogs = useSelector((state) => state.dogs.myDogs);
   const activeDog = useSelector((state) => state.dogs.activeDog);
+
   useEffect(() => {
     if (dogsReady) return;
     dispatch(fetchAllDogs());
@@ -55,24 +49,28 @@ export function DogsPage() {
               alt="a random cute dog photo by Sharon Snider"
               src="/dogs/cute.jpg"
             />
-            <h3 className="dogName">{dog.name}</h3>
-            <div className="cardContents">
-              <dl>
-                <dt>Weight:</dt>
-                <dd>{dog.weight}</dd>
-                <dt>Date of Birth:</dt>
-                <dd>{dog.dob}</dd>
-                <dt>Breed:</dt>
-                <dd>{dog.breed}</dd>
-              </dl>
+            <div style={{ flex: 1 }}>
+              <div className="dogCardHeader">
+                <h3 className="dogName">{dog.name}</h3>
+                <button
+                  className="deleteDog"
+                  aria-label={`Remove ${dog.name} from your dog list`}
+                  onClick={(e) => handleDeleteDog(e, dog)}
+                >
+                  x
+                </button>
+              </div>
+              <div className="cardContents">
+                <dl>
+                  <dt>Size:</dt>
+                  <dd>{dog.size}</dd>
+                  <dt>Age:</dt>
+                  <dd>{dog.age}</dd>
+                  <dt>Breed:</dt>
+                  <dd>{dog.breed}</dd>
+                </dl>
+              </div>
             </div>
-            <button
-              className="deleteDog"
-              aria-label={`Remove ${dog.name} from your dog list`}
-              onClick={(e) => handleDeleteDog(e, dog)}
-            >
-              x
-            </button>
           </div>
         );
       })}
