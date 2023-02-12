@@ -301,3 +301,14 @@ dd {
 .alert.show {
   opacity: 100%;
 }
+
+.dogImg {
+  font-size: 8rem;
+  line-height: 1em;
+  margin-right: 13px;
+}
+
+.restrictions h3 {
+  width: fit-content;
+  text-decoration: underline;
+}

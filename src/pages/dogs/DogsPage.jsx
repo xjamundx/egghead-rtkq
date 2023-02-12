@@ -52,10 +52,7 @@ export function DogsPage() {
               "card closable" + (luckyDog === dog.id ? " luckyDog" : "")
             }
           >
-            <img
-              alt="a random cute dog photo by Sharon Snider"
-              src="/images/cute.jpg"
-            />
+            <i className="dogImg">🐶</i>
             <div style={{ flex: 1 }}>
               <div className="dogCardHeader">
                 <h3 className="dogName">{dog.name}</h3>

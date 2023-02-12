@@ -45,3 +45,7 @@ export const getServicesForLuckyDog = (state) => {
 };
 
 export default servicesSlice.reducer;
+
+export const getServiceById = (state, serviceId) => {
+  return state.services.services.find((service) => service.id === serviceId);
+};
