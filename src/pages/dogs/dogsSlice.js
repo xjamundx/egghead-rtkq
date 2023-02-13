@@ -52,9 +52,7 @@ export const dogsSlice = createSlice({
       for (const id in dogs) {
         const dog = dogs[id];
         myDogs[id] = {
-          id,
-          breed: dog.breed,
-          name: dog.name,
+          ...dog,
           size: getSize(dog.weight),
           age: getAge(dog.dob),
         };
@@ -77,6 +75,8 @@ export const dogsSlice = createSlice({
 export const { luckyDogChosen } = dogsSlice.actions;
 
 export default dogsSlice.reducer;
+
+// utilities
 
 function getSize(weight) {
   weight = parseInt(weight, 10);

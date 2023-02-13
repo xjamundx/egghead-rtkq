@@ -21,7 +21,7 @@ export async function deleteDog(id) {
   }).then((response) => response.json());
 }
 
-export async function fetchAllDogs() {
+export async function getDogs() {
   return fetch("/api/dogs").then((response) => response.json());
 }
 

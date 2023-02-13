@@ -8,7 +8,9 @@ import "./index.css";
 
 if (import.meta.env.DEV) {
   const { worker } = await import("./mocks/browser");
-  worker.start({ scope: "/api", onUnhandledRequest: "bypass" });
+  worker.start({
+    onUnhandledRequest: "bypass",
+  });
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -12,8 +12,7 @@ export const handlers = [
   // submit the contact form
   rest.post("/api/contact", (req, res, ctx) => {
     const data = req.json();
-    console.log("Received contact form submission", data);
-    return res(ctx.json({}));
+    return res(ctx.json(data));
   }),
 
   // get the list of all of the services
@@ -49,7 +48,6 @@ export const handlers = [
 
   rest.delete("/api/dogs/:id", async (req, res, ctx) => {
     const { id } = req.params;
-    console.log("Rest DELETE", { id });
     if (id in dogs) {
       // delete
       delete dogs[id];

@@ -4,6 +4,11 @@
     "eslint:recommended",
     "plugin:react-hooks/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "plugins": ["react"],
   "parserOptions": {
     "ecmaFeatures": { "jsx": true },
@@ -12,6 +17,7 @@
   },
   "env": { "es2020": true, "browser": true, "node": true },
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": ["error", { "args": "none" }]
   }
 }
