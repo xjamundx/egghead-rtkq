@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeDog, addDog, fetchAllDogs } from "./dogsSlice";
+import { removeDog, addDog, getDogs } from "./dogsSlice";
 import { LuckyDog } from "./LuckyDog";
 
 export function DogsPage() {
@@ -12,7 +12,7 @@ export function DogsPage() {
 
   useEffect(() => {
     if (dogsReady) return;
-    dispatch(fetchAllDogs());
+    dispatch(getDogs());
   }, [dispatch, dogsReady]);
 
   const handleDeleteDog = (e, dog) => {
@@ -28,7 +28,7 @@ export function DogsPage() {
 
     // add the dog, then refetch the list
     dispatch(addDog(data)).then(() => {
-      dispatch(fetchAllDogs());
+      dispatch(getDogs());
     });
 
     // close immediately we don't need to wait
@@ -42,8 +42,12 @@ export function DogsPage() {
         list of <i>all</i> of your dogs, so that we can provide them with the
         best services possible.
       </p>
-      <p>Choose the lucky dog that will be groomed next.</p>
-      <LuckyDog />
+      {Object.values(myDogs).length > 0 && (
+        <>
+          <p>Choose the lucky dog that will be groomed next.</p>
+          <LuckyDog />
+        </>
+      )}
       {Object.values(myDogs).map((dog) => {
         return (
           <div

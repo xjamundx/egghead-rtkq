@@ -7,7 +7,7 @@ import {
   servicesReceived,
   getServicesForLuckyDog,
 } from "./servicesSlice";
-import { fetchAllDogs } from "../dogs/dogsSlice";
+import { getDogs } from "../dogs/dogsSlice";
 import { Loader } from "../../components/Loader";
 import * as api from "../../api";
 
@@ -22,7 +22,7 @@ export function ServicesPage() {
   const myServices = useSelector(getServicesForLuckyDog);
 
   useEffect(() => {
-    if (!hasDogs) dispatch(fetchAllDogs());
+    if (!hasDogs) dispatch(getDogs());
     if (hasServices) return;
     dispatch(servicesLoading());
     api.getServices().then((services) => {

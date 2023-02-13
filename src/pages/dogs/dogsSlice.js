@@ -7,8 +7,8 @@ const initialState = {
   dogsLoaded: false,
 };
 
-export const fetchAllDogs = createAsyncThunk("dogs/fetchAllDogs", async () => {
-  const response = await api.fetchAllDogs();
+export const getDogs = createAsyncThunk("dogs/getDogs", async () => {
+  const response = await api.getDogs();
   return response;
 });
 
@@ -40,10 +40,10 @@ export const dogsSlice = createSlice({
   },
   extraReducers: (builder) => {
     // fetching dogs has pending fulfilled and rejected states
-    builder.addCase(fetchAllDogs.pending, (state) => {
+    builder.addCase(getDogs.pending, (state) => {
       state.dogsReady = false;
     });
-    builder.addCase(fetchAllDogs.fulfilled, (state, action) => {
+    builder.addCase(getDogs.fulfilled, (state, action) => {
       state.dogsReady = true;
       const dogs = action.payload;
       const myDogs = {};
@@ -59,10 +59,9 @@ export const dogsSlice = createSlice({
           age: getAge(dog.dob),
         };
       }
-      console.log({ dogs: action.payload, myDogs });
       state.myDogs = myDogs;
     });
-    builder.addCase(fetchAllDogs.rejected, (state, action) => {
+    builder.addCase(getDogs.rejected, (state, action) => {
       state.dogsReady = false;
       state.myDogs = action.payload;
     });

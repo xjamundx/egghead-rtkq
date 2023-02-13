@@ -24,6 +24,8 @@ export const servicesSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { servicesLoading, servicesReceived } = servicesSlice.actions;
 
+export default servicesSlice.reducer;
+
 export const getServicesForLuckyDog = (state) => {
   // if you don't have a lucky dog, show all of the services
   const dog = state.dogs.myDogs[state.dogs.luckyDog];
@@ -43,8 +45,6 @@ export const getServicesForLuckyDog = (state) => {
       return restrictions.breed ? restrictions.size.includes(dog.size) : true;
     });
 };
-
-export default servicesSlice.reducer;
 
 export const getServiceById = (state, serviceId) => {
   return state.services.services.find((service) => service.id === serviceId);
