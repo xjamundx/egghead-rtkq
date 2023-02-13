@@ -12,23 +12,23 @@ export const handlers = [
   // submit the contact form
   rest.post("/api/contact", (req, res, ctx) => {
     const data = req.json();
-    return res(ctx.json(data));
+    return res(ctx.delay(), ctx.json(data));
   }),
 
   // get the list of all of the services
   rest.get("/api/services", (req, res, ctx) => {
-    return res(ctx.json(Object.values(services)));
+    return res(ctx.delay(), ctx.json(Object.values(services)));
   }),
 
   // get detail for a specific service
   rest.get("/api/services/:id", (req, res, ctx) => {
     const { id } = req.params;
-    return res(ctx.json(services[id]));
+    return res(ctx.delay(), ctx.json(services[id]));
   }),
 
   // get all of your dogs
   rest.get("/api/dogs", (req, res, ctx) => {
-    return res(ctx.json(dogs));
+    return res(ctx.delay(), ctx.json(dogs));
   }),
 
   // add a dog
@@ -43,7 +43,7 @@ export const handlers = [
     // then save
     lightlyPersistDogs();
 
-    return res(ctx.json({ success: true }));
+    return res(ctx.delay(), ctx.json({ success: true }));
   }),
 
   rest.delete("/api/dogs/:id", async (req, res, ctx) => {
@@ -56,7 +56,7 @@ export const handlers = [
       lightlyPersistDogs();
 
       // then return whategver happens
-      return res(ctx.json({ id }));
+      return res(ctx.delay(4000), ctx.json({ id }));
     } else {
       ctx.status(404);
       return res(ctx.json({ error: "what dog?" }));
