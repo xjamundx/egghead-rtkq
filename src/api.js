@@ -6,7 +6,9 @@ export async function getServices() {
 
 // dog calls
 
-export async function updateDog(id, dog) {}
+export async function getDogs() {
+  return fetch("/api/dogs").then((response) => response.json());
+}
 
 export async function addDog(dog) {
   return fetch("/api/dogs", {
@@ -19,10 +21,6 @@ export async function deleteDog(id) {
   return fetch("/api/dogs/" + id, {
     method: "delete",
   }).then((response) => response.json());
-}
-
-export async function getDogs() {
-  return fetch("/api/dogs").then((response) => response.json());
 }
 
 // other calls
