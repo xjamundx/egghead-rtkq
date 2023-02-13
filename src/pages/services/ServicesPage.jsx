@@ -2,38 +2,27 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LuckyDog } from "../dogs/LuckyDog";
-import {
-  servicesLoading,
-  servicesReceived,
-  getServicesForLuckyDog,
-} from "./servicesSlice";
+import { getServicesForLuckyDog } from "./servicesSlice";
 import { getDogs } from "../dogs/dogsSlice";
 import { Loader } from "../../components/Loader";
-import * as api from "../../api";
+import { useGetServicesQuery } from "../../store/apiSlice";
 
 export function ServicesPage() {
   const dispatch = useDispatch();
-  const services = useSelector((state) => state.services.services);
-  const loading = useSelector((state) => state.services.loading);
-  const hasServices = useSelector((state) => state.services.hasServices);
+  const { data: services, isLoading } = useGetServicesQuery();
   const myDogs = useSelector((state) => state.dogs.myDogs);
   const hasDogs = useSelector((state) => state.dogs.hasDogs);
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
-  const myServices = useSelector(getServicesForLuckyDog);
+  const myServices = services; // useSelector(getServicesForLuckyDog);
 
   useEffect(() => {
     if (!hasDogs) dispatch(getDogs());
-    if (hasServices) return;
-    dispatch(servicesLoading());
-    api.getServices().then((services) => {
-      dispatch(servicesReceived(services));
-    });
-  }, [dispatch, hasServices, hasDogs]);
+  }, [dispatch, hasDogs]);
 
   return (
     <div className="page">
       <h1>Services</h1>
-      {loading || !hasServices ? (
+      {isLoading || !services ? (
         <>
           <Loader />
           <Loader />
@@ -79,7 +68,7 @@ export function ServicesPage() {
               <LuckyDog />
             </>
           )}
-          {myServices.map((service) => (
+          {services.map((service) => (
             <div className="card" key={service.id}>
               <Link to={`/services/${service.id}`}>
                 <img src={service.imageSrc} alt={service.imageAlt} />

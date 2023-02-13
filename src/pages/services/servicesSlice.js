@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  hasServices: false,
   services: [],
 };
 
@@ -15,7 +14,6 @@ export const servicesSlice = createSlice({
     },
     servicesReceived: (state, action) => {
       state.loading = false;
-      state.hasServices = true;
       state.services = action.payload;
     },
   },
