@@ -11,6 +11,7 @@ html {
 .page {
   max-width: 640px;
   margin: 1em auto;
+  margin-top: 120px;
 }
 
 .logo {
@@ -48,6 +49,9 @@ html {
 .topNav {
   background-color: #ffaf08;
   height: 5em;
+  border-bottom: 2px solid mediumpurple;
+  position: fixed;
+  width: 100%;
 }
 
 .topNav ul {
@@ -55,6 +59,18 @@ html {
   list-style: none;
   display: flex;
   justify-content: space-around;
+  height: 100%;
+  padding: 0;
+}
+
+.topNav li {
+  flex: 1;
+  border-right: 1px solid mediumpurple;
+}
+
+.topNav li:last-of-type {
+  flex: 1;
+  border-right: none;
 }
 
 .topNav a {
@@ -62,13 +78,26 @@ html {
   line-height: 2.5em;
   text-shadow: 1px 2px 3px #b269b2;
   transition: all 0.25s;
+  width: 100%;
+  display: inline-block;
 }
 
-.topNav a.hover,
-.topNav a.selected {
-  text-shadow: 1px 2px 5px #b269b2, 1px 1px 1px white;
+.topNav a:hover {
   font-size: 2em;
-  text-decoration: underline;
+}
+
+.topNav li.selected {
+  background: mediumpurple;
+}
+
+.topNav li.selected a:hover {
+  font-size: 1.8em;
+}
+
+.topNav li.selected a {
+  color: orange;
+  text-shadow: none;
+  text-decoration: none;
 }
 .loader {
   width: 320px;
