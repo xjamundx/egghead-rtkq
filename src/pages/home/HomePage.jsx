@@ -2,9 +2,7 @@ export function HomePage() {
   return (
     <div className="page">
       <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
+        <img src="/favicon.svg" className="logo" alt="Dog Icon" />
       </div>
       <h1>Dog Grooming USA</h1>
       <p className="read-the-docs">
