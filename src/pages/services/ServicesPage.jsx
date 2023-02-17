@@ -6,11 +6,12 @@ import { Loader } from "../../components/Loader";
 import { useGetServicesQuery, useGetDogsQuery } from "../../store/apiSlice";
 
 export function ServicesPage() {
-  const { data: services, isLoadingServices } = useGetServicesQuery();
+  const { data: services, isLoading: isLoadingServices } =
+    useGetServicesQuery();
   const { data: myDogs, isLoading: isLoadingDogs } = useGetDogsQuery();
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
   const myServices = useSelector((state) =>
-    getServicesForLuckyDog(state, services)
+    getServicesForLuckyDog(state, services, myDogs)
   );
 
   return (

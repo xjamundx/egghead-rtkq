@@ -24,9 +24,9 @@ export const { servicesLoading, servicesReceived } = servicesSlice.actions;
 
 export default servicesSlice.reducer;
 
-export const getServicesForLuckyDog = (state, services) => {
+export const getServicesForLuckyDog = (state, services, dogs) => {
   // if you don't have a lucky dog, show all of the services
-  const dog = state.dogs.myDogs[state.dogs.luckyDog];
+  const dog = dogs?.[state.dogs.luckyDog];
   if (!dog) {
     return services;
   }
