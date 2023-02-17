@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useMakeContactMutation } from "../../store/apiSlice";
 
 export function ContactPage() {
-  const [wasSent, setWasSent] = useState(false);
-  const [makeContact] = useMakeContactMutation();
+  const [makeContact, { isSuccess, isLoading }] = useMakeContactMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,17 +9,13 @@ export function ContactPage() {
     const formData = new FormData(form);
     makeContact(Object.fromEntries(formData));
     form.reset();
-
-    // show an alert when the message sends
-    setWasSent(true);
-    setTimeout(() => {
-      setWasSent(false);
-    }, 2000);
   };
+
+  const disabled = isLoading || isSuccess;
   return (
     <div className="page">
       <h1>Contact</h1>
-      <p className={`alert ${wasSent ? "show" : ""}`}>
+      <p className={`alert ${isSuccess ? "show" : ""}`}>
         <b>Message sent</b>
       </p>
       <p>
@@ -32,6 +26,7 @@ export function ContactPage() {
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input
+          disabled={disabled}
           required
           id="email"
           type="email"
@@ -40,6 +35,7 @@ export function ContactPage() {
         />
         <label htmlFor="message">Message:</label>
         <textarea
+          disabled={disabled}
           required
           id="message"
           name="message"
@@ -47,7 +43,9 @@ export function ContactPage() {
           placeholder="Please let us know what you want answered and we will try to help"
         />
         <div>
-          <button type="submit">Contact</button>
+          <button disabled={disabled} type="submit">
+            Contact
+          </button>
         </div>
       </form>
     </div>
