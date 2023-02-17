@@ -13,7 +13,9 @@ export function ServicesPage() {
   const myDogs = useSelector((state) => state.dogs.myDogs);
   const hasDogs = useSelector((state) => state.dogs.hasDogs);
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
-  const myServices = services; // useSelector(getServicesForLuckyDog);
+  const myServices = useSelector((state) =>
+    getServicesForLuckyDog(state, services)
+  );
 
   useEffect(() => {
     if (!hasDogs) dispatch(getDogs());
@@ -68,7 +70,7 @@ export function ServicesPage() {
               <LuckyDog />
             </>
           )}
-          {services.map((service) => (
+          {myServices.map((service) => (
             <div className="card" key={service.id}>
               <Link to={`/services/${service.id}`}>
                 <img src={service.imageSrc} alt={service.imageAlt} />
