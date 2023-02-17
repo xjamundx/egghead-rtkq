@@ -78,7 +78,7 @@ export default dogsSlice.reducer;
 
 // utilities
 
-function getSize(weight) {
+export function getSize(weight) {
   weight = parseInt(weight, 10);
   if (weight <= 10) return "teacup";
   if (weight <= 25) return "small";
@@ -89,7 +89,7 @@ function getSize(weight) {
 }
 
 const YEAR = 3.156e10;
-function getAge(dob) {
+export function getAge(dob) {
   const date = +new Date(dob);
   return Math.floor((Date.now() - date) / YEAR);
 }
