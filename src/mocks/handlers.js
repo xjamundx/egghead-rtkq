@@ -23,7 +23,15 @@ export const handlers = [
   // get detail for a specific service
   rest.get("/api/services/:id", (req, res, ctx) => {
     const { id } = req.params;
-    return res(ctx.delay(), ctx.json(services[id]));
+    const service = services[id];
+    if (service) {
+      return res(ctx.delay(), ctx.json(service));
+    } else {
+      return res(
+        ctx.status(404),
+        ctx.json({ message: "The service was not found within our mock data." })
+      );
+    }
   }),
 
   // get all of your dogs
@@ -58,8 +66,7 @@ export const handlers = [
       // then return whategver happens
       return res(ctx.delay(4000), ctx.json({ id }));
     } else {
-      ctx.status(404);
-      return res(ctx.json({ error: "what dog?" }));
+      return res(ctx.status(404), ctx.json({ message: "what dog?" }));
     }
   }),
 ];
