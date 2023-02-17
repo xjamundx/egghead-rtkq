@@ -18,6 +18,13 @@ export const api = createApi({
           return dogs;
         },
       }),
+      addDog: builder.mutation({
+        query: (body) => ({
+          url: "/dogs",
+          method: "POST",
+          body,
+        }),
+      }),
       getServices: builder.query({ query: () => "/services" }),
       getService: builder.query({ query: (id) => `/services/${id}` }),
       makeContact: builder.mutation({
@@ -32,6 +39,7 @@ export const api = createApi({
 });
 
 export const {
+  useAddDogMutation,
   useGetServicesQuery,
   useGetDogsQuery,
   useGetServiceQuery,
