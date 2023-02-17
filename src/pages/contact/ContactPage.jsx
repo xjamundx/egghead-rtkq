@@ -12,7 +12,7 @@ export function ContactPage() {
     makeContact(Object.fromEntries(formData));
     form.reset();
 
-    // show a
+    // show an alert when the message sends
     setWasSent(true);
     setTimeout(() => {
       setWasSent(false);
