@@ -33,6 +33,16 @@ export const api = createApi({
           url: "/dogs/" + id,
           method: "DELETE",
         }),
+        onQueryStarted(id, { dispatch, queryFulfilled }) {
+          const update = dispatch(
+            api.util.updateQueryData("getDogs", undefined, (dogs) => {
+              delete dogs[id];
+            })
+          );
+          queryFulfilled.catch(() => {
+            update.undo();
+          });
+        },
         invalidatesTags: ["Dogs"],
       }),
       getServices: builder.query({ query: () => "/services" }),

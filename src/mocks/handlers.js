@@ -65,9 +65,13 @@ export const handlers = [
       lightlyPersistDogs();
 
       // then return whategver happens
-      return res(ctx.delay(), ctx.json({ id }));
+      return res(ctx.delay(2500), ctx.json({ id }));
     } else {
-      return res(ctx.status(404), ctx.json({ message: "what dog?" }));
+      return res(
+        ctx.delay(),
+        ctx.status(404),
+        ctx.json({ message: "what dog?" })
+      );
     }
   }),
 ];
