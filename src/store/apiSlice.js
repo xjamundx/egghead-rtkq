@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  // keepUnusedDataFor: 5,
+  tagTypes: ["Services", "Dogs"],
   endpoints: (builder) => {
     return {
       getDogs: builder.query({
-        // keepUnusedDataFor: 5,
         query: () => "/dogs",
+        providesTags: ["Dogs"],
         transformResponse: (dogs) => {
           for (const id in dogs) {
             const dog = dogs[id];
@@ -26,6 +26,14 @@ export const api = createApi({
           method: "POST",
           body,
         }),
+        invalidatesTags: ["Dogs"],
+      }),
+      removeDog: builder.mutation({
+        query: (id) => ({
+          url: "/dogs/" + id,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["Dogs"],
       }),
       getServices: builder.query({ query: () => "/services" }),
       getService: builder.query({ query: (id) => `/services/${id}` }),
@@ -45,6 +53,7 @@ export const {
   useGetServicesQuery,
   useGetDogsQuery,
   useGetServiceQuery,
+  useRemoveDogMutation,
   useMakeContactMutation,
 } = api;
 
