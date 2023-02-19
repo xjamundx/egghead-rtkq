@@ -1,6 +1,9 @@
+import { api } from "../store/apiSlice";
 import { Link, useLocation } from "react-router-dom";
 
 export function TopNav() {
+  const prefetchServices = api.usePrefetch("getServices");
+  const prefetchDogs = api.usePrefetch("getDogs");
   const location = useLocation();
   return (
     <nav className="topNav">
@@ -8,10 +11,16 @@ export function TopNav() {
         <li className={location.pathname === "/" ? "selected" : ""}>
           <Link to="/">Home</Link>
         </li>
-        <li className={location.pathname === "/services" ? "selected" : ""}>
+        <li
+          onMouseEnter={() => prefetchServices()}
+          className={location.pathname === "/services" ? "selected" : ""}
+        >
           <Link to="/services">Services</Link>
         </li>
-        <li className={location.pathname === "/dogs" ? "selected" : ""}>
+        <li
+          onMouseEnter={() => prefetchDogs()}
+          className={location.pathname === "/dogs" ? "selected" : ""}
+        >
           <Link to="/dogs">My Dogs</Link>
         </li>
         <li className={location.pathname === "/contact" ? "selected" : ""}>
