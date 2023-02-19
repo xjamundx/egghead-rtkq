@@ -1,7 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/api",
+    // headers: { "x-custom-header-global": Math.random() },
+    prepareHeaders: (headers) => {
+      headers.set("x-custom-header-global", Math.random());
+      return headers;
+    },
+  }),
   tagTypes: ["Services", "Dogs"],
   endpoints: (builder) => {
     return {
@@ -51,6 +58,7 @@ export const api = createApi({
         query: (body) => ({
           url: "/contact",
           method: "POST",
+          headers: { "x-custom-header": Math.random() },
           body,
         }),
       }),
