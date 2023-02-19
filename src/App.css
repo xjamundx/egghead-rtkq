@@ -182,6 +182,13 @@ body button:focus {
   box-shadow: none;
 }
 
+body button:hover:disabled,
+body button:disabled {
+  background: gray;
+  box-shadow: 3px 3px 2px orange;
+  cursor: default;
+}
+
 form {
   text-align: left;
   width: fit-content;

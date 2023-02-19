@@ -41,6 +41,7 @@ export const handlers = [
 
   // add a dog
   rest.post("/api/dogs", async (req, res, ctx) => {
+    // return res(ctx.status(500), ctx.json({ message: "Too many dogs" }));
     const data = await req.json();
     const id = crypto.randomUUID();
     data.id = id;
@@ -64,9 +65,13 @@ export const handlers = [
       lightlyPersistDogs();
 
       // then return whategver happens
-      return res(ctx.delay(4000), ctx.json({ id }));
+      return res(ctx.delay(2500), ctx.json({ id }));
     } else {
-      return res(ctx.status(404), ctx.json({ message: "what dog?" }));
+      return res(
+        ctx.delay(),
+        ctx.status(404),
+        ctx.json({ message: "what dog?" })
+      );
     }
   }),
 ];
