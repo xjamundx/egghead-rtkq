@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
@@ -92,3 +93,25 @@ function getAge(dob) {
   const date = +new Date(dob);
   return Math.floor((Date.now() - date) / YEAR);
 }
+
+export const getServicesForLuckyDog = createSelector(
+  api.endpoints.getServices.select(),
+  api.endpoints.getDogs.select(),
+  (state) => state.dogs.luckyDog,
+  ({ data: services }, { data: dogs }, luckyDog) => {
+    const dog = dogs?.[luckyDog];
+    if (!dog) return services;
+    return services
+      .filter(({ restrictions }) => {
+        return restrictions.minAge ? dog.age >= restrictions.minAge : true;
+      })
+      .filter(({ restrictions }) => {
+        return restrictions.breed
+          ? restrictions.breed.includes(dog.breed)
+          : true;
+      })
+      .filter(({ restrictions }) => {
+        return restrictions.breed ? restrictions.size.includes(dog.size) : true;
+      });
+  }
+);
