@@ -2,9 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  // keepUnusedDataFor: 5,
   endpoints: (builder) => {
     return {
       getDogs: builder.query({
+        // keepUnusedDataFor: 5,
         query: () => "/dogs",
         transformResponse: (dogs) => {
           for (const id in dogs) {
