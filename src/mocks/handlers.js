@@ -41,6 +41,7 @@ export const handlers = [
 
   // add a dog
   rest.post("/api/dogs", async (req, res, ctx) => {
+    // return res(ctx.status(500), ctx.json({ message: "Too many dogs" }));
     const data = await req.json();
     const id = crypto.randomUUID();
     data.id = id;

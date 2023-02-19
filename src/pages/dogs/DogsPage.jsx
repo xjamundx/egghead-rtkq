@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeDog, getDogs } from "./dogsSlice";
+import { removeDog } from "./dogsSlice";
 import { LuckyDog } from "./LuckyDog";
 import { Loader } from "../../components/Loader";
 import { useGetDogsQuery, useAddDogMutation } from "../../store/apiSlice";
@@ -9,7 +9,7 @@ export function DogsPage() {
   const dialogRef = useRef();
   const dispatch = useDispatch();
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
-  const { data: myDogs, isLoading } = useGetDogsQuery();
+  const { data: myDogs, isLoading, refetch } = useGetDogsQuery();
   const [addDog] = useAddDogMutation();
 
   const handleDeleteDog = (e, dog) => {
@@ -24,7 +24,15 @@ export function DogsPage() {
     const data = Object.fromEntries(formData);
 
     // add the dog, then refetch the list
-    addDog(data);
+    addDog(data)
+      .unwrap()
+      .then((data) => {
+        refetch();
+      })
+      .catch((response) => {
+        const message = `Adding Dog Failed: ${JSON.stringify(response)}`;
+        alert(message);
+      });
 
     // close immediately we don't need to wait
     dialogRef.current?.close();
