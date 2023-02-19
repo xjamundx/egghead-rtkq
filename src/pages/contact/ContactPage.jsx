@@ -10,7 +10,7 @@ export function ContactPage() {
     api.makeContact(Object.fromEntries(formData));
     form.reset();
 
-    // show a
+    // show a short lived message
     setWasSent(true);
     setTimeout(() => {
       setWasSent(false);
