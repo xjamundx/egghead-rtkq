@@ -11,7 +11,7 @@ export function ServicesPage() {
   const { data: myDogs, isLoading: isLoadingDogs } = useGetDogsQuery();
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
   const myServices = useSelector((state) =>
-    getServicesForLuckyDog(state, services)
+    getServicesForLuckyDog(state, services, myDogs)
   );
 
   return (

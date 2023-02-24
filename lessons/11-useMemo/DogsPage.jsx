@@ -10,6 +10,7 @@ export function DogsPage() {
   const dispatch = useDispatch();
   const luckyDog = useSelector((state) => state.dogs.luckyDog);
   const { data, isLoading } = useGetDogsQuery();
+
   const myDogs = useMemo(() => {
     const dogs = {};
     for (const id in data) {
