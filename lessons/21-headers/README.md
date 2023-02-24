@@ -1,0 +1,3 @@
+# Customize Query and Mutation Headers in RTK Query with prepareHeaders
+
+...
