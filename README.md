@@ -1,6 +1,6 @@
 # egghead-rtkq
 
-A sample app for an egghead course showing how to adopt rtk query in an existing redux / rtk application.
+A sample app for an egghead course showing how to adopt rtk query in an existing redux / rtk application. The fully migrated application can be found in the [rtkq](https://github.com/xjamundx/egghead-rtkq/tree/rtkq/src) branch. The `lesssons/` folder has code snippets specific to each lesson.
 
 ### Setup
 
